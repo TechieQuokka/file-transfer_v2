@@ -56,6 +56,10 @@ impl KnownPeers {
             KnownPeers::default()
         };
 
+        // 삭제된 항목 반영: self에 없는 IP는 current에서 제거
+        current.send_peers.retain(|p| self.send_peers.iter().any(|e| e.ip == p.ip));
+        current.recv_peers.retain(|p| self.recv_peers.iter().any(|e| e.ip == p.ip));
+
         // send_peers merge
         for entry in &self.send_peers {
             if let Some(existing) = current.send_peers.iter_mut().find(|p| p.ip == entry.ip) {
