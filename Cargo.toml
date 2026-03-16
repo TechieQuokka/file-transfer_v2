@@ -1,0 +1,54 @@
+[package]
+name = "upnp"
+version = "1.0.17"
+edition = "2024"
+
+[[bin]]
+name = "upnp"
+path = "src/main.rs"
+
+[dependencies]
+# 비동기 런타임
+tokio             = { version = "1.50",  features = ["full"] }
+fslock            = "0.2"
+
+# CLI
+clap              = { version = "4.6",   features = ["derive"] }
+
+# TLS
+rustls            = { version = "0.23",  features = ["ring"] }
+tokio-rustls      = "0.26"
+rcgen             = "0.14"
+
+# UPnP
+rupnp             = "3.0"
+
+# 직렬화
+serde             = { version = "1.0",   features = ["derive"] }
+serde_yaml_ng     = "0.10"
+serde_json        = "1.0"
+
+# 암호화 / 인증
+rand              = "0.10"
+blake3            = "1.8"
+
+# UX
+indicatif         = "0.18"
+
+# 에러 핸들링
+anyhow            = "1.0"
+
+# 시간
+chrono            = { version = "0.4",   features = ["serde"] }
+
+# 네트워크
+local-ip-address  = "0.6"
+futures           = "0.3"
+futures-util      = "0.3"
+ssdp-client       = "2.0"
+
+# 암호화 (Ed25519 키쌍)
+ring              = "0.17"
+
+# 경로
+dirs              = "5"
