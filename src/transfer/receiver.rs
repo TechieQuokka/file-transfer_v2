@@ -133,7 +133,8 @@ where
     let mut peers = KnownPeers::load()?;
 
     let init: HandshakeInit = read_message(&mut stream, MSG_HANDSHAKE_INIT).await?;
-    let is_known = peers.find_recv_peer(&peer_ip).is_some();
+    // 양쪽 모두 known으로 인정해야만 auth 생략: sender가 --remove 했다면 init.is_known_peer = false
+    let is_known = peers.find_recv_peer(&peer_ip).is_some() && init.is_known_peer;
     let stored_key = peers.find_recv_peer(&peer_ip).map(|p| p.public_key.clone());
 
     if is_known {
